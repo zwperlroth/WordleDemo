@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wordle Duel</title>
+  <!-- Bump ?v= when style.css or a .js file changes, so browsers don't mix
+       a new page with an old cached file. -->
+  <link rel="stylesheet" href="style.css?v=5">
+</head>
+<body>
+  <main class="app">
+    <aside class="controls">
+      <button id="ready" type="button" disabled>Ready</button>
+      <button id="music" type="button">Music: on</button>
+      <p class="hint">Open this page on two<br> devices. Both press<br> Ready, then race to<br> find the same word.</p>
+      <a class="nav-link" href="index.html">&larr; Play Quordle</a>
+      <button id="private-room" class="link-button" type="button">New private room</button>
+    </aside>
+
+    <section class="game duel">
+      <p id="status" class="status" role="status" aria-live="polite">Connecting&hellip;</p>
+      <div class="duel-boards">
+        <figure class="duel-board">
+          <div id="my-board" class="grid"></div>
+          <figcaption>You <span id="my-score" class="score">0</span></figcaption>
+        </figure>
+        <figure class="duel-board opponent">
+          <div id="opp-board" class="grid"></div>
+          <figcaption>Opponent <span id="opp-score" class="score">0</span></figcaption>
+        </figure>
+      </div>
+      <p id="message" class="message" aria-live="polite"></p>
+      <div id="keyboard" class="keyboard" aria-label="Keyboard"></div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <script src="common.js?v=5"></script>
+  <script src="duel.js?v=5"></script>
+</body>
+</html>

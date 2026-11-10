@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Quordle</title>
-  <!-- Bump ?v= when style.css or quordle.js changes, so browsers don't mix
+  <!-- Bump ?v= when style.css or a .js file changes, so browsers don't mix
        a new page with an old cached file. -->
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
   <main class="app">
@@ -14,6 +14,7 @@
       <button id="new-game" type="button">New game</button>
       <button id="music" type="button">Music: on</button>
       <p class="hint">Solve all 4 words<br> in 9 guesses.<br> Type or click letters,<br> Enter to guess.</p>
+      <a class="nav-link" href="duel.html">Duel a friend &rarr;</a>
     </aside>
 
     <section class="game">
@@ -23,6 +24,7 @@
     </section>
   </main>
 
-  <script src="quordle.js?v=4"></script>
+  <script src="common.js?v=5"></script>
+  <script src="quordle.js?v=5"></script>
 </body>
 </html>

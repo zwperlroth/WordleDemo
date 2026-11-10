@@ -46,7 +46,7 @@ html, body {
   padding: 10px;
 }
 
-#new-game, #music {
+#new-game, #music, #ready {
   display: block;
   width: 120px;
   margin: 10px 0 15px;
@@ -57,8 +57,27 @@ html, body {
   font: inherit;
   cursor: pointer;
 }
-#new-game:hover, #music:hover { background: #3a3a3c; }
+#new-game:hover, #music:hover, #ready:hover:not(:disabled) { background: #3a3a3c; }
 #music { margin-top: 0; }
+#ready { font-weight: bold; }
+#ready:not(:disabled):not(.is-ready) { background: var(--green); border-color: #4e8a49; }
+#ready.is-ready { background: var(--button); }
+#ready:disabled { opacity: 0.5; cursor: default; }
+
+.nav-link, .link-button {
+  display: block;
+  margin-top: 18px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.link-button { margin-top: 10px; color: var(--hint); font-size: 13px; }
 
 .hint {
   margin: 0;
@@ -146,6 +165,45 @@ html, body {
   text-shadow: 0 0 3px #000, 0 0 2px #000;
 }
 .key.wide { width: var(--wide-w); font-size: 11px; text-shadow: none; }
+/* Single-board keyboard colors (duel page) */
+.key.G { background: var(--green); }
+.key.Y { background: var(--yellow); }
+.key.gray { background: var(--absent-key); }
+
+/* Duel page: my board and the opponent's (colors only), side by side */
+.duel { --my-tile: 44px; --opp-tile: 26px; }
+.status {
+  min-height: 20px;
+  margin: 0 0 14px;
+  color: var(--hint);
+  font-size: 14px;
+  text-align: center;
+}
+.duel-boards {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 18px;
+}
+.duel-board { margin: 0; }
+.duel .message { height: auto; min-height: 24px; }
+.duel-board .grid { --tile: var(--my-tile); --gap: 5px; padding: 0; }
+.duel-board.opponent .grid { --tile: var(--opp-tile); --gap: 3px; }
+.duel-board.opponent .tile { border-width: 1px; }
+.duel-board figcaption {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+.score {
+  display: inline-block;
+  min-width: 24px;
+  margin-left: 4px;
+  padding: 1px 6px;
+  border-radius: 10px;
+  background: var(--button);
+}
 
 /* Phones: stack the controls above the board and shrink to fit */
 @media (max-width: 560px) {
@@ -158,9 +216,14 @@ html, body {
   .app { flex-direction: column; align-items: center; padding: 8px 16px; }
   .controls { display: flex; align-items: center; gap: 16px; padding: 0; }
   .controls { flex-wrap: wrap; justify-content: center; gap: 8px 12px; }
-  #new-game, #music { margin: 0; width: 110px; }
+  #new-game, #music, #ready { margin: 0; width: 110px; }
   .hint { width: 100%; text-align: center; }
   .hint br { display: none; }
+  .nav-link, .link-button { margin: 0; }
+  .duel {
+    --my-tile: min(44px, calc((100vw - 32px - 18px - 20px) * 0.62 / 5));
+    --opp-tile: min(26px, calc((100vw - 32px - 18px - 20px) * 0.38 / 5));
+  }
   .message { margin: 10px 0; }
   .game { width: 100%; padding-top: 10px; }
 }

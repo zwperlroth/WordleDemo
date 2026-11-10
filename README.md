@@ -1,4 +1,4 @@
-# WordleDemo — Quordle
+# WordleDemo: Quordle and Wordle Duel
 
 Play it online:
 - **Quordle:** https://zwperlroth.github.io/WordleDemo/
@@ -7,7 +7,7 @@ Play it online:
 A Quordle game, four Wordle puzzles at once, plus a two-player Wordle Duel (see below).
 Quordle comes in two versions that share the same word list and rules:
 
-- **Web**: `index.html`, `style.css` and `quordle.js`, with background music from `audio/`
+- **Web**: `index.html`, `quordle.js`, `common.js` and `style.css`, with background music from `audio/`
 - **Desktop**: `quordle_tkinter.py`, built with Python and tkinter (it also runs in Thonny)
 
 ## How to play

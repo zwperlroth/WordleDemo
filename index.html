@@ -3,26 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Wordle</title>
-  <!-- Bump ?v= when style.css or wordle.js changes, so browsers don't mix
+  <title>Quordle</title>
+  <!-- Bump ?v= when style.css or quordle.js changes, so browsers don't mix
        a new page with an old cached file. -->
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
   <main class="app">
     <aside class="controls">
       <button id="new-game" type="button">New game</button>
       <button id="music" type="button">Music: on</button>
-      <p class="hint">Type or click letters,<br> Enter to guess.</p>
+      <p class="hint">Solve all 4 words<br> in 9 guesses.<br> Type or click letters,<br> Enter to guess.</p>
     </aside>
 
     <section class="game">
-      <div id="grid" class="grid" aria-label="Guesses"></div>
+      <div id="boards" class="boards"></div>
       <p id="message" class="message" role="status" aria-live="polite"></p>
       <div id="keyboard" class="keyboard" aria-label="Keyboard"></div>
     </section>
   </main>
 
-  <script src="wordle.js?v=3"></script>
+  <script src="quordle.js?v=4"></script>
 </body>
 </html>

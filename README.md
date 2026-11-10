@@ -1,14 +1,25 @@
-# WordleDemo
+# WordleDemo — Quordle
 
-A Wordle clone in two versions that share the same word list and rules:
+Play it online: **https://zwperlroth.github.io/WordleDemo/**
 
-- **Web**: `index.html`, `style.css` and `wordle.js`, with background music from `audio/`
-- **Desktop**: `wordle_tkinter.py`, built with Python and tkinter (it also runs in Thonny)
+A Quordle game: four Wordle puzzles at once. It comes in two versions that share
+the same word list and rules:
 
-You have 6 tries to guess a 5-letter word. After each guess, every letter is colored:
-green means the right letter in the right spot, yellow means the letter is in the word
-but in a different spot, and gray means it isn't in the word. A guess has to be a real
-word from `words.txt`.
+- **Web**: `index.html`, `style.css` and `quordle.js`, with background music from `audio/`
+- **Desktop**: `quordle_tkinter.py`, built with Python and tkinter (it also runs in Thonny)
+
+## How to play
+
+- There are 4 hidden 5-letter words, one per board. You have **9 guesses** to find all four.
+- Each guess is entered on every board you haven't solved yet. Once a board is solved,
+  it stops taking guesses and gets a green outline.
+- On each board, a letter is colored green if it's in that word in the same spot,
+  yellow if it's in the word but in a different spot, and gray if it isn't in the word.
+- Each keyboard key is split into four quarters, one per board, laid out like the boards:
+  top-left is board 1, top-right board 2, bottom-left board 3, bottom-right board 4.
+- A guess has to be a real word from `words.txt`.
+- If you run out of guesses, the boards you missed get a red outline and their words
+  are shown below the boards.
 
 ## Running the web version
 
@@ -25,11 +36,11 @@ Use **New game** to restart and **Music** to toggle the soundtrack.
 ## Running the desktop version
 
 ```bash
-python3 wordle_tkinter.py
+python3 quordle_tkinter.py
 ```
 
 You need Python 3 with tkinter (included with most Python installs). The script reads
-`words.txt` from its own folder.
+`words.txt` from its own folder. The desktop version has no music.
 
 ## Files
 
@@ -37,7 +48,8 @@ You need Python 3 with tkinter (included with most Python installs). The script 
 |---|---|
 | `index.html` | Web page layout |
 | `style.css` | Web styling |
-| `wordle.js` | Web game logic |
-| `wordle_tkinter.py` | Desktop game |
+| `quordle.js` | Web game logic and music |
+| `quordle_tkinter.py` | Desktop game |
 | `words.txt` | Word list (2,315 words) |
 | `audio/` | Background music for the web version |
+| `.nojekyll` | Tells GitHub Pages to serve the files as they are |

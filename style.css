@@ -1,4 +1,4 @@
-/* Colors match wordle_tkinter.py */
+/* Colors match quordle_tkinter.py */
 :root {
   --green: #6aaa64;
   --yellow: #c9b458;
@@ -12,8 +12,12 @@
   --hint: #a0a0a0;
   --button: #2c2c2e;
 
-  --tile: 56px;
-  --gap: 8px;
+  --missed: #c94a4a;
+
+  /* Tiles shrink to fit two stacked boards (18 rows) on short screens */
+  --tile: clamp(16px, calc((100vh - 300px) / 18), 34px);
+  --gap: 3px;
+  --board-gap: 12px;
   --key-w: 30px;
   --key-h: 40px;
   --key-gap: 6px;
@@ -63,19 +67,32 @@ html, body {
   line-height: 1.4;
 }
 
-/* Game board */
+/* Game boards: 2 x 2 */
 .game {
   width: 400px;
   padding-top: 20px;
 }
 
+.boards {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: var(--board-gap);
+  justify-content: center;
+}
+
 .grid {
   display: grid;
+  padding: 3px;
+  border-radius: 4px;
+  outline: 2px solid transparent;
   grid-template-columns: repeat(5, var(--tile));
   grid-auto-rows: var(--tile);
   gap: var(--gap);
   justify-content: center;
 }
+.grid.solved { outline-color: var(--green); }
+.grid.solved .tile:not(.G) { opacity: 0.85; }
+.grid.missed { outline-color: var(--missed); }
 
 .tile {
   display: flex;
@@ -83,7 +100,7 @@ html, body {
   justify-content: center;
   border: 2px solid var(--empty-line);
   background: var(--empty-fill);
-  font-size: 24px;
+  font-size: calc(var(--tile) * 0.55);
   font-weight: bold;
   text-transform: uppercase;
   user-select: none;
@@ -96,7 +113,7 @@ html, body {
 .message {
   height: 24px;
   margin: 16px 0;
-  padding-left: calc((400px - (5 * var(--tile) + 4 * var(--gap))) / 2);
+  text-align: center;
   font-size: 18px;
   font-weight: bold;
 }
@@ -125,17 +142,15 @@ html, body {
   font: bold 15px Helvetica, Arial, sans-serif;
   cursor: pointer;
   user-select: none;
+  /* Letter keys are split into 4 colored quarters, one per board */
+  text-shadow: 0 0 3px #000, 0 0 2px #000;
 }
-.key.wide { width: var(--wide-w); font-size: 11px; }
-.key.G { background: var(--green); }
-.key.Y { background: var(--yellow); }
-.key.gray { background: var(--absent-key); }
+.key.wide { width: var(--wide-w); font-size: 11px; text-shadow: none; }
 
 /* Phones: stack the controls above the board and shrink to fit */
 @media (max-width: 560px) {
   :root {
-    --tile: 52px;
-    --gap: 6px;
+    --tile: clamp(16px, min(calc((100vw - 76px) / 10), calc((100vh - 400px) / 18)), 34px);
     --key-w: calc((100vw - 32px - 9 * var(--key-gap)) / 10);
     --wide-w: calc(var(--key-w) * 1.6);
     --key-h: 52px;
@@ -148,11 +163,18 @@ html, body {
   .hint br { display: none; }
   .message { margin: 10px 0; }
   .game { width: 100%; padding-top: 10px; }
-  .message { padding-left: 0; text-align: center; }
 }
 
-/* Short phones (e.g. iPhone SE): smaller tiles and keys so it all fits */
-@media (max-width: 560px) and (max-height: 640px) {
-  :root { --tile: 42px; --key-h: 44px; }
-  .tile { font-size: 20px; }
+/* Short phones (e.g. iPhone SE): smaller keys so the boards get more room */
+@media (max-width: 560px) and (max-height: 700px) {
+  :root {
+    --key-h: 38px;
+    --gap: 2px;
+    --board-gap: 8px;
+    --tile: clamp(12px, min(calc((100vw - 76px) / 10), calc((100vh - 300px) / 18)), 34px);
+  }
+  .hint { display: none; }
+  .message { margin: 4px 0; height: 20px; font-size: 16px; }
+  .game { padding-top: 6px; }
+  .tile { border-width: 1px; }
 }

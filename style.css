@@ -171,7 +171,7 @@ html, body {
 .key.gray { background: var(--absent-key); }
 
 /* Duel page: my board and the opponent's (colors only), side by side */
-.duel { --my-tile: 44px; --opp-tile: 26px; }
+.duel { --my-tile: 42px; --opp-tile: 19px; }
 .status {
   min-height: 20px;
   margin: 0 0 14px;
@@ -190,6 +190,16 @@ html, body {
 .duel-board .grid { --tile: var(--my-tile); --gap: 5px; padding: 0; }
 .duel-board.opponent .grid { --tile: var(--opp-tile); --gap: 3px; }
 .duel-board.opponent .tile { border-width: 1px; }
+.opponents { display: flex; flex-direction: column; gap: 12px; }
+.duel-board.opponent figcaption { margin-top: 5px; font-size: 12px; }
+.duel-board.opponent.empty { opacity: 0.35; }
+.duel-board.opponent.winner .grid { outline: 2px solid var(--green); outline-offset: 3px; }
+.ready-tag {
+  padding: 1px 6px;
+  border-radius: 10px;
+  background: var(--green);
+  font-size: 11px;
+}
 .duel-board figcaption {
   margin-top: 8px;
   font-size: 14px;
@@ -221,8 +231,8 @@ html, body {
   .hint br { display: none; }
   .nav-link, .link-button { margin: 0; }
   .duel {
-    --my-tile: min(44px, calc((100vw - 32px - 18px - 20px) * 0.62 / 5));
-    --opp-tile: min(26px, calc((100vw - 32px - 18px - 20px) * 0.38 / 5));
+    --my-tile: min(42px, calc((100vw - 32px - 18px - 22px) * 0.66 / 5));
+    --opp-tile: min(19px, calc((100vw - 32px - 18px - 22px) * 0.34 / 5));
   }
   .message { margin: 10px 0; }
   .game { width: 100%; padding-top: 10px; }

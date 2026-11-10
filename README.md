@@ -25,26 +25,31 @@ Quordle comes in two versions that share the same word list and rules:
 
 ## Wordle Duel
 
-Two players race to find the same word.
+Two or three players race to find the same word.
 
-1. Both players open https://zwperlroth.github.io/WordleDemo/duel.html, on two different
-   devices or browsers.
-2. Once the page says **Opponent connected**, both press **Ready**. The round starts
-   when both are ready.
-3. Each player has 6 guesses. You see your opponent's colors as they guess, but not
-   their letters.
-4. The first player to find the word wins the round. If neither finds it, it's a draw.
-   Press **Ready** again for a rematch. The score badges count wins.
+1. Each player opens https://zwperlroth.github.io/WordleDemo/duel.html on their own
+   device or browser. The room holds up to 3 players.
+2. Everyone presses **Ready**. The round starts once everyone in the room is ready,
+   so you can play with 2 or 3.
+3. Each player has 6 guesses. Your board is the big one. The small boards next to it
+   show each opponent's colors as they guess, but not their letters.
+4. The first player to find the word wins the round, and their board gets a green
+   outline. If nobody finds it, it's a draw. Press **Ready** again for the next round.
+   The score badges count wins.
 
-Everyone who opens `duel.html` shares one room, which holds two players. To play
-without strangers getting in, press **New private room** and send the new link
-(it ends in `#` plus a code) to your opponent.
+If a player leaves mid-round, the others keep playing (the round ends if only one is
+left). Someone who arrives mid-round joins at the next round.
+
+Everyone who opens `duel.html` shares one room. To play without strangers getting
+in, press **New private room** and send the new link (it ends in `#` plus a code)
+to the other players.
 
 How it works: the two browsers connect directly over WebRTC using
 [PeerJS](https://peerjs.com/). The free public PeerJS server only introduces them,
-so there's no server to run. The first player in a room becomes the host: the
-host's browser picks the word and decides who won. If the host leaves, the other
-player takes over the room.
+so there's no server to run. The first player in a room becomes the host (Player 1),
+and the others connect to the host's browser. The host picks the word, decides who
+won and passes every update along to the others. If the host leaves, the remaining
+players form a new room automatically; the round count and scores start over.
 
 Limitations:
 - It needs the PeerJS server and unpkg.com (where the PeerJS library loads from) to be

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wordle</title>
+  <!-- Bump ?v= when style.css or wordle.js changes, so browsers don't mix
+       a new page with an old cached file. -->
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+  <main class="app">
+    <aside class="controls">
+      <button id="new-game" type="button">New game</button>
+      <button id="music" type="button">Music: on</button>
+      <p class="hint">Type or click letters,<br> Enter to guess.</p>
+    </aside>
+
+    <section class="game">
+      <div id="grid" class="grid" aria-label="Guesses"></div>
+      <p id="message" class="message" role="status" aria-live="polite"></p>
+      <div id="keyboard" class="keyboard" aria-label="Keyboard"></div>
+    </section>
+  </main>
+
+  <script src="wordle.js?v=3"></script>
+</body>
+</html>

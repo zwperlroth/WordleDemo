@@ -1,0 +1,158 @@
+/* Colors match wordle_tkinter.py */
+:root {
+  --green: #6aaa64;
+  --yellow: #c9b458;
+  --gray: #787c7e;
+  --absent-key: #3a3a3c;
+  --empty-fill: #121213;
+  --empty-line: #3a3a3c;
+  --typed-line: #565758;
+  --key-unused: #818384;
+  --text: #ffffff;
+  --hint: #a0a0a0;
+  --button: #2c2c2e;
+
+  --tile: 56px;
+  --gap: 8px;
+  --key-w: 30px;
+  --key-h: 40px;
+  --key-gap: 6px;
+  --wide-w: 52px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--empty-fill);
+  color: var(--text);
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px;
+}
+
+/* Side controls */
+.controls {
+  padding: 10px;
+}
+
+#new-game, #music {
+  display: block;
+  width: 120px;
+  margin: 10px 0 15px;
+  padding: 6px 0;
+  background: var(--button);
+  color: var(--text);
+  border: 2px outset #3a3a3c;
+  font: inherit;
+  cursor: pointer;
+}
+#new-game:hover, #music:hover { background: #3a3a3c; }
+#music { margin-top: 0; }
+
+.hint {
+  margin: 0;
+  color: var(--hint);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Game board */
+.game {
+  width: 400px;
+  padding-top: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, var(--tile));
+  grid-auto-rows: var(--tile);
+  gap: var(--gap);
+  justify-content: center;
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--empty-line);
+  background: var(--empty-fill);
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  user-select: none;
+}
+.tile.typed { border-color: var(--typed-line); }
+.tile.G { background: var(--green); border-color: var(--green); }
+.tile.Y { background: var(--yellow); border-color: var(--yellow); }
+.tile.gray { background: var(--gray); border-color: var(--gray); }
+
+.message {
+  height: 24px;
+  margin: 16px 0;
+  padding-left: calc((400px - (5 * var(--tile) + 4 * var(--gap))) / 2);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* On-screen keyboard */
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--key-gap);
+  align-items: center;
+}
+
+.key-row {
+  display: flex;
+  gap: var(--key-gap);
+}
+
+.key {
+  width: var(--key-w);
+  height: var(--key-h);
+  padding: 0;
+  border: none;
+  border-radius: 2px;
+  background: var(--key-unused);
+  color: var(--text);
+  font: bold 15px Helvetica, Arial, sans-serif;
+  cursor: pointer;
+  user-select: none;
+}
+.key.wide { width: var(--wide-w); font-size: 11px; }
+.key.G { background: var(--green); }
+.key.Y { background: var(--yellow); }
+.key.gray { background: var(--absent-key); }
+
+/* Phones: stack the controls above the board and shrink to fit */
+@media (max-width: 560px) {
+  :root {
+    --tile: 52px;
+    --gap: 6px;
+    --key-w: calc((100vw - 32px - 9 * var(--key-gap)) / 10);
+    --wide-w: calc(var(--key-w) * 1.6);
+    --key-h: 52px;
+  }
+  .app { flex-direction: column; align-items: center; padding: 8px 16px; }
+  .controls { display: flex; align-items: center; gap: 16px; padding: 0; }
+  .controls { flex-wrap: wrap; justify-content: center; gap: 8px 12px; }
+  #new-game, #music { margin: 0; width: 110px; }
+  .hint { width: 100%; text-align: center; }
+  .hint br { display: none; }
+  .message { margin: 10px 0; }
+  .game { width: 100%; padding-top: 10px; }
+  .message { padding-left: 0; text-align: center; }
+}
+
+/* Short phones (e.g. iPhone SE): smaller tiles and keys so it all fits */
+@media (max-width: 560px) and (max-height: 640px) {
+  :root { --tile: 42px; --key-h: 44px; }
+  .tile { font-size: 20px; }
+}
